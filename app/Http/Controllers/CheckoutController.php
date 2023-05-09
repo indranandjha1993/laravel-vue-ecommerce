@@ -22,7 +22,7 @@ class CheckoutController extends Controller
         /** @var \App\Models\User $user */
         $user = $request->user();
 
-        \Stripe\Stripe::setApiKey(getenv('STRIPE_SECRET_KEY'));
+        \Stripe\Stripe::setApiKey('sk_test_51Kpa34SEM5fKHppUhkbkoIImXJ1RFHZVz47MxjmaI00oVBOK7yG3zGeW8zzvs3AHHfuiJ9lKZRM7Y6RQL0GJXxJT00LtOZKCxF');
 
         [$products, $cartItems] = Cart::getProductsAndCartItems();
 
@@ -34,7 +34,7 @@ class CheckoutController extends Controller
             $totalPrice += $product->price * $quantity;
             $lineItems[] = [
                 'price_data' => [
-                    'currency' => 'usd',
+                    'currency' => 'inr',
                     'product_data' => [
                         'name' => $product->title,
 //                        'images' => [$product->image]
@@ -96,7 +96,7 @@ class CheckoutController extends Controller
     {
         /** @var \App\Models\User $user */
         $user = $request->user();
-        \Stripe\Stripe::setApiKey(getenv('STRIPE_SECRET_KEY'));
+        \Stripe\Stripe::setApiKey('sk_test_51Kpa34SEM5fKHppUhkbkoIImXJ1RFHZVz47MxjmaI00oVBOK7yG3zGeW8zzvs3AHHfuiJ9lKZRM7Y6RQL0GJXxJT00LtOZKCxF');
 
         try {
             $session_id = $request->get('session_id');
@@ -131,13 +131,13 @@ class CheckoutController extends Controller
 
     public function checkoutOrder(Order $order, Request $request)
     {
-        \Stripe\Stripe::setApiKey(getenv('STRIPE_SECRET_KEY'));
+        \Stripe\Stripe::setApiKey('sk_test_51Kpa34SEM5fKHppUhkbkoIImXJ1RFHZVz47MxjmaI00oVBOK7yG3zGeW8zzvs3AHHfuiJ9lKZRM7Y6RQL0GJXxJT00LtOZKCxF');
 
         $lineItems = [];
         foreach ($order->items as $item) {
             $lineItems[] = [
                 'price_data' => [
-                    'currency' => 'usd',
+                    'currency' => 'inr',
                     'product_data' => [
                         'name' => $item->product->title,
 //                        'images' => [$product->image]
